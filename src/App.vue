@@ -1,56 +1,47 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-toolbar-title dark>
+        <router-link tag="span" to="/" style="cursor:pointer"
+          >Smena team</router-link
+        >
+      </v-toolbar-title>
+      <v-spacer />
+      <v-btn text v-if="!isLoggedIn" to="/login">Вход</v-btn>
+      <v-btn text v-if="!isLoggedIn" to="/registration">Регистрация</v-btn>
+      <v-btn text v-if="isLoggedIn" @click="logOut"
+        ><v-icon dark>mdi-exit-to-app</v-icon></v-btn
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
-
     <v-main>
-      <HelloWorld />
+      <v-container fluid>
+        <notification />
+        <router-view />
+      </v-container>
     </v-main>
+
+    <v-footer app> </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Notification from '@/components/Notification.vue';
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld
+    Notification
   },
-
-  data: () => ({
-    //
-  })
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    }
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('logOut');
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
