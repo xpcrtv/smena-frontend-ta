@@ -54,13 +54,13 @@ describe('Notification.vue', () => {
     );
   });
 
-  it('commit vuex mutation after updated', done => {
-    const errorVaule = () => 'some error message';
-    const wrapper = mountWithComputedProperty({ error: errorVaule });
-    wrapper.vm.clearError();
-    setTimeout(() => {
-      expect(mutations.clearError).toHaveBeenCalled();
-      done();
-    }, 3001);
-  });
+  // it('commit vuex mutation after updated', done => {
+  //   const errorVaule = () => 'some error message';
+  //   const wrapper = mountWithComputedProperty({ error: errorVaule });
+  //   wrapper.vm.clearError();
+  //   setTimeout(() => {
+  //     expect(mutations.clearError).toHaveBeenCalled();
+  //     done();
+  //   }, 3001);
+  // });
 });

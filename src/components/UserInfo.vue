@@ -1,5 +1,10 @@
 <template>
-  <v-card class="mx-auto" max-width="400" v-if="user">
+  <v-card
+    data-testid="user-info-card"
+    class="mx-auto"
+    max-width="400"
+    v-if="user"
+  >
     <v-img class="white--text align-end" height="200px" :src="user.avatar" />
     <v-card-title>{{ user.username }}</v-card-title>
     <v-card-text class="text--primary">
@@ -16,7 +21,12 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('getUserInfo');
+    this.getUserInfo();
+  },
+  methods: {
+    getUserInfo() {
+      this.$store.dispatch('getUserInfo');
+    }
   }
 };
 </script>
