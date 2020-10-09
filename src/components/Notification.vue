@@ -8,6 +8,7 @@
         type="error"
         elevation="4"
         width="400px"
+        data-testid="app-notification"
       >
         {{ error }}
       </v-alert>
@@ -23,8 +24,13 @@ export default {
     }
   },
   updated() {
-    const { commit } = this.$store;
-    setTimeout(() => commit('clearError'), 3000);
+    this.clearError();
+  },
+  methods: {
+    clearError() {
+      const { commit } = this.$store;
+      setTimeout(() => commit('clearError'), 3000);
+    }
   }
 };
 </script>
