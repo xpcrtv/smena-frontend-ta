@@ -19,15 +19,47 @@ const mutations = {
 };
 
 const actions = {
-  logIn({ commit }, userData) {
-    return apiService.logIn(userData).then(({ data }) => {
-      commit('authComplete', data.token);
-    });
+  logIn({ commit, dispatch }, userData) {
+    return apiService
+      .logIn(userData)
+      .then(({ data }) => {
+        commit('authComplete', data.token);
+      })
+      .catch(error => {
+        let errorMsg;
+        if (error.response) {
+          if (error.response.status === 401) {
+            errorMsg = 'неправильные имя пользователя/пароль';
+          }
+        } else if (error.request) {
+          errorMsg = 'Возникли проблемы с сетью';
+        } else {
+          errorMsg = error.message;
+        }
+        dispatch('setError', errorMsg);
+        return Promise.reject(error);
+      });
   },
-  register({ commit }, userData) {
-    return apiService.register(userData).then(({ data }) => {
-      commit('authComplete', data.token);
-    });
+  register({ commit, dispatch }, userData) {
+    return apiService
+      .register(userData)
+      .then(({ data }) => {
+        commit('authComplete', data.token);
+      })
+      .catch(error => {
+        let errorMsg;
+        if (error.response) {
+          if (error.response.status === 401) {
+            errorMsg = 'Пользователь с таким именем уже зарегистрирован';
+          }
+        } else if (error.request) {
+          errorMsg = 'Возникли проблемы с сетью';
+        } else {
+          errorMsg = error.message;
+        }
+        dispatch('setError', errorMsg);
+        return Promise.reject(error);
+      });
   },
   logOut({ commit }) {
     commit('authReset');

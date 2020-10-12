@@ -54,27 +54,18 @@ export default {
   },
   methods: {
     logIn() {
-      const { dispatch } = this.$store;
-      const { loginForm } = this.$refs;
       const userData = {
         username: this.username,
         password: this.password
       };
-      const isValid = loginForm.validate();
+      const isValid = this.$refs.loginForm.validate();
       if (isValid) {
         this.loading = true;
-        dispatch('logIn', userData)
+        this.$store
+          .dispatch('logIn', userData)
           .then(() => this.$router.push('/'))
-          .catch(error => {
+          .catch(() => {
             this.loading = false;
-            let errorMsg;
-            if (error.message === 'Network Error') {
-              errorMsg =
-                'Проблемы с сетью или сервером. Попробуйте войти позже!';
-            } else {
-              errorMsg = error.response.data.error;
-            }
-            dispatch('setError', errorMsg);
           });
       }
     }

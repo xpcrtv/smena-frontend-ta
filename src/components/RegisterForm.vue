@@ -72,28 +72,19 @@ export default {
   },
   methods: {
     registerUser() {
-      const { dispatch } = this.$store;
-      const { registerForm } = this.$refs;
       const newUserData = {
         username: this.username,
         password: this.password
       };
-      const isValid = registerForm.validate();
+      const isValid = this.$refs.registerForm.validate();
       if (isValid) {
         this.loading = true;
-        dispatch('register', newUserData)
-          .then(() => dispatch('logIn', newUserData))
+        this.$store
+          .dispatch('register', newUserData)
+          .then(() => this.$store.dispatch('logIn', newUserData))
           .then(() => this.$router.push('/'))
-          .catch(error => {
+          .catch(() => {
             this.loading = false;
-            let errorMsg;
-            if (error.message === 'Network Error') {
-              errorMsg =
-                'Проблемы с сетью или сервером. Попробуйте зарегистрироваться позже!';
-            } else {
-              errorMsg = error.response.data.error;
-            }
-            dispatch('setError', errorMsg);
           });
       }
     }
