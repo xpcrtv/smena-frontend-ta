@@ -4,21 +4,19 @@ import Vuetify from 'vuetify';
 import Vuex from 'vuex';
 
 describe('Notification.vue', () => {
-  let localVue;
-  let vuetify;
-  let store;
-  let mutations;
-  beforeEach(() => {
-    localVue = createLocalVue();
-    localVue.use(Vuex);
-    vuetify = new Vuetify();
-    mutations = {
-      clearError: jest.fn()
-    };
-    store = new Vuex.Store({
-      mutations
-    });
+  const localVue = createLocalVue();
+  localVue.use(Vuex);
+  const vuetify = new Vuetify();
+  const mutations = {
+    clearError: jest.fn()
+  };
+  const store = new Vuex.Store({
+    mutations
   });
+
+  let wrapper;
+
+  afterEach(() => wrapper.destroy());
 
   const mountWithComputedProperty = (computed = {}) => {
     const component = mount(Notification, {
@@ -32,7 +30,7 @@ describe('Notification.vue', () => {
 
   it('not visible when error empty', () => {
     const errorVaule = () => null;
-    const wrapper = mountWithComputedProperty({ error: errorVaule });
+    wrapper = mountWithComputedProperty({ error: errorVaule });
     expect(wrapper.find('[data-testid="app-notification"]').exists()).toBe(
       false
     );
@@ -40,7 +38,7 @@ describe('Notification.vue', () => {
 
   it('show on get error message', () => {
     const errorVaule = () => 'error message';
-    const wrapper = mountWithComputedProperty({ error: errorVaule });
+    wrapper = mountWithComputedProperty({ error: errorVaule });
     expect(wrapper.find('[data-testid="app-notification"]').exists()).toBe(
       true
     );
@@ -48,19 +46,19 @@ describe('Notification.vue', () => {
 
   it('error message is correct', () => {
     const errorVaule = () => 'some error message';
-    const wrapper = mountWithComputedProperty({ error: errorVaule });
+    wrapper = mountWithComputedProperty({ error: errorVaule });
     expect(wrapper.find('[data-testid="app-notification"]').text()).toBe(
       errorVaule()
     );
   });
 
-  // it('commit vuex mutation after updated', done => {
-  //   const errorVaule = () => 'some error message';
-  //   const wrapper = mountWithComputedProperty({ error: errorVaule });
-  //   wrapper.vm.clearError();
-  //   setTimeout(() => {
-  //     expect(mutations.clearError).toHaveBeenCalled();
-  //     done();
-  //   }, 3001);
-  // });
+  it('commit vuex mutation after get error message', done => {
+    const errorVaule = () => 'some error message';
+    wrapper = mountWithComputedProperty({ error: errorVaule });
+    wrapper.vm.clearError();
+    setTimeout(() => {
+      expect(mutations.clearError).toHaveBeenCalled();
+      done();
+    }, 3000);
+  });
 });

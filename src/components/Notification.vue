@@ -23,8 +23,12 @@ export default {
       return this.$store.getters.errorMessage;
     }
   },
-  updated() {
-    this.clearError();
+  watch: {
+    error(errorMsg) {
+      if (errorMsg) {
+        this.clearError();
+      }
+    }
   },
   methods: {
     clearError() {
