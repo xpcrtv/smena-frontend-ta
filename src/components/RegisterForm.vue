@@ -5,14 +5,15 @@
     </v-toolbar>
     <v-form
       ref="registerForm"
-      @submit.prevent="registerUser"
-      lazy-validation
       :disabled="loading"
+      @submit.prevent="registerUser"
+      v-model="isFormValid"
+      data-testid="register-form"
     >
       <v-card-text>
         <v-text-field
           label="Ваше имя"
-          name="username"
+          name="name"
           prepend-icon="mdi-account"
           type="text"
           v-model="username"
@@ -43,7 +44,12 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :loading="loading" type="submit" color="primary"
+        <v-btn
+          data-testid="submit-btn"
+          :loading="loading"
+          type="submit"
+          color="primary"
+          :disabled="!isFormValid"
           >Зарегистрироваться</v-btn
         >
       </v-card-actions>
@@ -57,7 +63,8 @@ export default {
     username: '',
     password: '',
     passwordRepeat: '',
-    loading: false
+    loading: false,
+    isFormValid: false
   }),
   computed: {
     userNameRules() {
