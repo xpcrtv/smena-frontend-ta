@@ -6,8 +6,9 @@
     <v-form
       ref="loginForm"
       :disabled="loading"
+      v-model="isFormValid"
       @submit.prevent="logIn"
-      lazy-validation
+      data-testid="login-form"
     >
       <v-card-text>
         <v-text-field
@@ -31,7 +32,14 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :loading="loading" type="submit" color="primary">Войти</v-btn>
+        <v-btn
+          data-testid="submit-btn"
+          :disabled="!isFormValid"
+          :loading="loading"
+          type="submit"
+          color="primary"
+          >Войти</v-btn
+        >
       </v-card-actions>
     </v-form>
   </v-card>
@@ -42,7 +50,8 @@ export default {
   data: () => ({
     username: '',
     password: '',
-    loading: false
+    loading: false,
+    isFormValid: false
   }),
   computed: {
     userNameRules() {
