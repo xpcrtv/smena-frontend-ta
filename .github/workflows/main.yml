@@ -26,6 +26,6 @@ jobs:
           npm install,
           npm run build
       - name: lint
-          npm run lint
+        run: npm run lint
       - name: unit test
-          npm run test:unit
+        run: npm run test:unit
