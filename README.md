@@ -1,4 +1,5 @@
 # smena-frontend
+![CI](https://github.com/xpcrtv/smena-frontend-ta/workflows/CI/badge.svg?branch=master)
 
 ## Project setup
 ```
