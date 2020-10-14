@@ -29,7 +29,7 @@ const actions = {
         let errorMsg;
         if (error.response) {
           if (error.response.status === 401) {
-            errorMsg = 'неправильные имя пользователя/пароль';
+            errorMsg = 'Неправильные имя пользователя/пароль';
           }
         } else if (error.request) {
           errorMsg = 'Возникли проблемы с сетью';
@@ -49,7 +49,7 @@ const actions = {
       .catch(error => {
         let errorMsg;
         if (error.response) {
-          if (error.response.status === 401) {
+          if (error.response.status === 400) {
             errorMsg = 'Пользователь с таким именем уже зарегистрирован';
           }
         } else if (error.request) {

@@ -58,7 +58,7 @@ export default {
       return [value => !!value || 'Введите имя!'];
     },
     passwordRules() {
-      return [value => !!value || 'Введитепароль!'];
+      return [value => !!value || 'Введите пароль!'];
     }
   },
   methods: {
