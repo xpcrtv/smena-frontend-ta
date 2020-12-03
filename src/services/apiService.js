@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.BASE_URL;
-
+const API_URL = process.env.VUE_APP_API_URL;
 const authService = {
   init() {
-    axios.defaults.baseURL = BASE_URL;
+    axios.defaults.baseURL = API_URL;
   },
   setHeader(key, value) {
     axios.defaults.headers.common[key] = value;
