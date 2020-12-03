@@ -1,35 +1,25 @@
 # smena-frontend
 ![CI](https://github.com/xpcrtv/smena-frontend-ta/workflows/CI/badge.svg?branch=master)
 
-## Project setup
-```
-npm install
-```
+### **Описание**
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Вариант решения тестового задания Smena Team (https://github.com/smenateam/assignments/blob/master/frontend/README.md); Взято с Hexlet Assigments
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your unit tests
-```
-npm run test:unit
-```
+### **Демо**
+https://smena-frontend-ta-p30mgolry.vercel.app/
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+### **Стек**
+VueJS@2, VUEX, Vue-Router, Jest, Cypress, Vuetify
 
-### Lints and fixes files
-```
-npm run lint
-```
+Создано при помощи VueCLI.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### **Команды**
+
+Установка: npm install
+
+Запуск сборки: npm run build
+
+Запуск сервера разработки: npm run serve
+
+Тестовый пользователь test/123
